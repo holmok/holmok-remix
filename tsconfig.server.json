@@ -9,14 +9,14 @@
   ],
   "compilerOptions": {
     "typeRoots": [
-      "./types"
+      "./types",
     ],
+    "types": [],
     "moduleResolution": "node",
     "rootDir": "./server",
     "module": "ESNext",
     "target": "ES2022",
     "noEmit": false,
     "outDir": "./dist"
- 
   }
 }
