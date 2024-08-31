@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.json",
+  "include": [
+    "./server/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "rootDir": "./server",
+    "module": "ESNext",
+    "target": "ES2022",
+    "noEmit": false,
+    "outDir": "./dist"
+ 
+  }
+}

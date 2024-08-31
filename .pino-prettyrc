@@ -1,0 +1,7 @@
+{
+  "colorize": true,
+  "levelFirst": true,
+  "ignore": "pid,hostname",
+  "singleLine": true,
+  "messageFormat": "{msg}{if reqId} ({reqId}){end}{if res.statusCode} - {res.statusCode}{end}{if req.url}:{req.url}{end}{if responseTime}/{responseTime}{end}\n"
+}
