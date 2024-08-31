@@ -6,6 +6,8 @@ My personal site that I am working on.
 
 Create a `.env.local` file in the root, using the `.env.local.example` as a template.
 
+Uses `nvm`, so `nvm use` to make sure your node version is good.
+
 |Command|What it do|
 |-|-|
 |`$ yarn dev` | Runs locally in dev mode with formatted logging |
