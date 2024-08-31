@@ -1,10 +1,12 @@
-# Holmok - Remix / Fastify
+# Holmok - Remix / Fastify / PostgreSQL / Memcached
 
 My personal site that I am working on.
 
 ### Run Stuff
 
 Create a `.env.local` file in the root, using the `.env.local.example` as a template.
+
+You will need a Memcached server to connect to for caching, and a PostgreSQL server to store data.
 
 Uses `nvm`, so `nvm use` to make sure your node version is good.
 
