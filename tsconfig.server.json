@@ -8,6 +8,9 @@
     "node_modules"
   ],
   "compilerOptions": {
+    "typeRoots": [
+      "./types"
+    ],
     "moduleResolution": "node",
     "rootDir": "./server",
     "module": "ESNext",

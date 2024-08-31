@@ -1,4 +1,17 @@
-import { MetaFunction } from '@remix-run/node'
+import { LoaderFunctionArgs, MetaFunction } from '@remix-run/node'
+
+interface PostData {
+  id: number
+  title: string
+  content: string
+  stub: string
+  live: boolean
+  archived: boolean
+  published: string
+  created: string
+  updated: string
+  categories: string[]
+}
 
 export const meta: MetaFunction = () => {
   return [
@@ -32,4 +45,18 @@ export default function Index (): JSX.Element {
 
     </div>
   )
+}
+
+export async function loader (args: LoaderFunctionArgs): Promise<{ posts: PostData[] }> {
+  const { context } = args
+  const { db, cache, logger } = context
+  const posts = await cache.get<PostData[]>('posts', async () => {
+    return db<PostData[]>('posts')
+      .select('*')
+      .where('live', true)
+      .andWhere('archived', false)
+      .orderBy('published', 'desc')
+  })
+  logger.info({ posts: posts.length }, 'Loaded posts')
+  return { posts }
 }

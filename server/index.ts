@@ -6,11 +6,15 @@ import Compress from '@fastify/compress'
 import Helmet from '@fastify/helmet'
 import Pino from 'pino'
 import * as Config from './config.js'
+import Cacher from './cacher.js'
+import knex from 'knex'
 
 installGlobals()
 sourceMapSupport.install()
 
 const logger = Pino(Config.logger)
+const cache = new Cacher(logger)
+const db = knex(Config.knex)
 
 const app = fastify({
   logger
@@ -52,7 +56,9 @@ await app.register(remixFastify, {
   getLoadContext: async (request, reply) => ({
     scriptNonce: reply.cspNonce.script,
     styleNonce: reply.cspNonce.style,
-    logger
+    logger,
+    cache,
+    db
   })
 })
 
