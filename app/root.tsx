@@ -1,16 +1,16 @@
 import {
-  Links,
-  Meta,
   Outlet,
-  Scripts,
-  ScrollRestoration,
   useLoaderData,
   useRouteError
 } from '@remix-run/react'
 import React from 'react'
-import Header from './components/header'
-import Footer from './components/footer'
 import { LinksFunction, LoaderFunctionArgs } from '@remix-run/node'
+import Layout from './components/layout'
+
+interface LoaderData {
+  scriptNonce: string
+  styleNonce: string
+}
 
 export const links: LinksFunction = () => {
   return [
@@ -50,55 +50,32 @@ export const links: LinksFunction = () => {
   ]
 }
 
+export function loader (args: LoaderFunctionArgs): LoaderData {
+  const { context } = args
+  const { scriptNonce, styleNonce } = context
+  return {
+    scriptNonce: scriptNonce as string | undefined ?? '',
+    styleNonce: styleNonce as string | undefined ?? ''
+  }
+}
+
 export default function App (): JSX.Element {
-  const { scriptNonce } = useLoaderData<typeof loader>()
+  const { scriptNonce, styleNonce } = useLoaderData<typeof loader>()
   return (
-    <html lang='en'>
-      <head>
-        <meta charSet='utf-8' />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <Meta />
-        <Links />
-      </head>
-      <body suppressHydrationWarning>
-        <Header />
-        <div className='container'>
-          <Outlet />
-        </div>
-        <Footer />
-        <ScrollRestoration nonce={scriptNonce} />
-        <Scripts nonce={scriptNonce} />
-      </body>
-    </html>
+    <Layout scriptNonce={scriptNonce} styleNonce={styleNonce}>
+      <Outlet />
+    </Layout>
   )
 }
 
-export function loader (args: LoaderFunctionArgs): { scriptNonce: string } {
-  const { context } = args
-  const { scriptNonce } = context
-  return { scriptNonce: scriptNonce as string | undefined ?? '' }
-}
-
 export function ErrorBoundary (): JSX.Element {
-  const error = useRouteError() as Error
+  const error = useRouteError() as Error & { status: number, statusText: string }
   return (
-    <html lang='en'>
-      <head>
-        <meta charSet='utf-8' />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <Meta />
-        <Links />
-      </head>
-      <body suppressHydrationWarning>
-        <Header hideNav />
-        <div className='container'>
-          <div>
-            <h1>Oh no, an error occurred!</h1>
-            <pre>{error.message}</pre>
-          </div>
-        </div>
-        <Footer />
-      </body>
-    </html>
+    <Layout hideNav>
+      <div>
+        <h1>Oh no, an error occurred!</h1>
+        <h3>{error.status} {error.statusText}</h3>
+      </div>
+    </Layout>
   )
 }

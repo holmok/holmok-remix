@@ -23,6 +23,20 @@ export const meta: MetaFunction = () => {
   ]
 }
 
+export async function loader (args: LoaderFunctionArgs): Promise<{ posts: PostData[] }> {
+  const { context } = args
+  const { db, cache, logger } = context
+  const posts = await cache.get<PostData[]>('posts', async () => {
+    return db<PostData[]>('posts')
+      .select('*')
+      .where('live', true)
+      .andWhere('archived', false)
+      .orderBy('published', 'desc')
+  })
+  logger.info({ posts: posts.length }, 'Loaded posts')
+  return { posts }
+}
+
 export default function Index (): JSX.Element {
   return (
     <div>
@@ -45,18 +59,4 @@ export default function Index (): JSX.Element {
 
     </div>
   )
-}
-
-export async function loader (args: LoaderFunctionArgs): Promise<{ posts: PostData[] }> {
-  const { context } = args
-  const { db, cache, logger } = context
-  const posts = await cache.get<PostData[]>('posts', async () => {
-    return db<PostData[]>('posts')
-      .select('*')
-      .where('live', true)
-      .andWhere('archived', false)
-      .orderBy('published', 'desc')
-  })
-  logger.info({ posts: posts.length }, 'Loaded posts')
-  return { posts }
 }

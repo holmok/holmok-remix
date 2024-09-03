@@ -5,7 +5,7 @@ export default function Footer (): JSX.Element {
   }
   return (
     <div className='footer'>
-      <div className='container'>
+      <div className='container flex-row'>
         <div className='copyright'>&copy; {new Date().getFullYear()} HOLMOK</div>
         <div className='back-to-top'> ⇡ <a onClick={backToTop} href='#top'>Back to top</a>  ⇡</div>
       </div>

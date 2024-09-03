@@ -7,7 +7,7 @@ html {
 
 body {
   margin: 0;
-  padding: 0;
+  padding: 0 0 100px 0;
 }
 
 p {
@@ -24,6 +24,12 @@ p {
   line-height: 50px;
   margin-bottom: 10px;
   z-index: 1000;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .footer {
@@ -45,6 +51,7 @@ p {
 .back-to-top {
   color: white;
 }
+
 .back-to-top a {
   color: white;
   text-decoration: none;
@@ -57,12 +64,9 @@ p {
 
 .container {
   margin: 0 auto;
-  width: 960px;
+  width: min( 960px, calc(100vw - 40px) );
   margin: auto;
   overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .logo {
@@ -108,7 +112,7 @@ p {
 .menu {
   position: absolute;
   background-color: black;
-  top:50px;
+  top: 50px;
   right: calc(50vw - 480px);
   list-style: none;
   margin: 0;
@@ -136,22 +140,17 @@ p {
 }
 
 @media (width <=980px) {
-  .container {
-    margin: 0 20px;
-    width: calc(100vw - 40px);
-    margin: auto;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row
-  }
+
+
   .menu {
     position: absolute;
     background-color: black;
-    top:50px;
+    top: 50px;
     list-style: none;
     margin: 0;
     padding: 0;
-    text-align: right;
+    text-align: center;
+    width: 100%;
     z-index: 0;
     right: 0;
   }

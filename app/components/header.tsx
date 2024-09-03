@@ -22,7 +22,7 @@ export default function Header (props: { hideNav?: boolean }): JSX.Element {
 
   return (
     <div className='header'>
-      <div className='container'>
+      <div className='container flex-row'>
         <div className='logo'><a href='/' onClick={homeClick}>HOLMOK</a></div>
         {(props.hideNav == null || !props.hideNav) && (
           <>

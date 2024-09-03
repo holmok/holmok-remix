@@ -39,10 +39,10 @@ await app.register(Helmet, {
   enableCSPNonces: true,
   contentSecurityPolicy: {
     directives: {
-      defaultSrc: ["'self'"],
-      connectSrc: ["'self'", 'http://127.0.0.1:3000', 'http://localhost:3000', 'ws://localhost:24678/'],
+      defaultSrc: ["'self'", 'http://127.0.0.1:3000', 'http://localhost:3000', 'ws://localhost:24678/', 'http://localhost:24678/'],
+      connectSrc: ["'self'", 'http://127.0.0.1:3000', 'http://localhost:3000', 'ws://localhost:24678/', 'http://localhost:24678/'],
       scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'", 'http://127.0.0.1:3000', 'http://localhost:3000', 'ws://localhost:24678/', 'http://localhost:24678/'],
       fontSrc: ["'self'"],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: [],

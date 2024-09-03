@@ -1,7 +1,12 @@
 export function loader (): Response {
-  return new Response('User-agent: *\nallow: /', {
-    headers: {
-      'Content-Type': 'text/plain'
-    }
-  })
+  return new Response(
+    [
+      'User-agent: *',
+      'allow: /'
+    ].join('\n'),
+    {
+      headers: {
+        'Content-Type': 'text/plain'
+      }
+    })
 }
