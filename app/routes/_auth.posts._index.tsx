@@ -10,9 +10,9 @@ export const meta: MetaFunction = () => {
   ]
 }
 
-export default function Posts (): JSX.Element {
+export default function Posts(): JSX.Element {
   const navigate = useNavigate()
-  function handleClick (event: React.MouseEvent<HTMLAnchorElement>): void {
+  function handleClick(event: React.MouseEvent<HTMLAnchorElement>): void {
     event.preventDefault()
     navigate(event.currentTarget.getAttribute('href') as string)
   }
@@ -23,7 +23,9 @@ export default function Posts (): JSX.Element {
           <h1>Posts</h1>
         </div>
         <div className='actions'>
-          <a href='/posts/new' onClick={handleClick}>New Post</a>
+          <a href='/posts/new' onClick={handleClick}>
+            New Post
+          </a>
         </div>
       </div>
     </>

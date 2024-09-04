@@ -1,9 +1,4 @@
-import {
-  Outlet,
-  useLoaderData,
-  useRouteError
-} from '@remix-run/react'
-import React from 'react'
+import { Outlet, useLoaderData, useRouteError } from '@remix-run/react'
 import { LinksFunction, LoaderFunctionArgs } from '@remix-run/node'
 import Layout from './components/layout'
 
@@ -50,16 +45,16 @@ export const links: LinksFunction = () => {
   ]
 }
 
-export function loader (args: LoaderFunctionArgs): LoaderData {
+export function loader(args: LoaderFunctionArgs): LoaderData {
   const { context } = args
   const { scriptNonce, styleNonce } = context
   return {
-    scriptNonce: scriptNonce as string | undefined ?? '',
-    styleNonce: styleNonce as string | undefined ?? ''
+    scriptNonce: (scriptNonce as string | undefined) ?? '',
+    styleNonce: (styleNonce as string | undefined) ?? ''
   }
 }
 
-export default function App (): JSX.Element {
+export default function App(): JSX.Element {
   const { scriptNonce, styleNonce } = useLoaderData<typeof loader>()
   return (
     <Layout scriptNonce={scriptNonce} styleNonce={styleNonce}>
@@ -68,13 +63,18 @@ export default function App (): JSX.Element {
   )
 }
 
-export function ErrorBoundary (): JSX.Element {
-  const error = useRouteError() as Error & { status: number, statusText: string }
+export function ErrorBoundary(): JSX.Element {
+  const error = useRouteError() as Error & {
+    status: number
+    statusText: string
+  }
   return (
     <Layout hideNav>
       <div>
         <h1>Oh no, an error occurred!</h1>
-        <h3>{error.status} {error.statusText}</h3>
+        <h3>
+          {error.status} {error.statusText}
+        </h3>
       </div>
     </Layout>
   )

@@ -1,5 +1,9 @@
 import { PassThrough } from 'node:stream'
-import type { AppLoadContext, EntryContext, LoaderFunctionArgs } from '@remix-run/node'
+import type {
+  AppLoadContext,
+  EntryContext,
+  LoaderFunctionArgs
+} from '@remix-run/node'
 import { createReadableStreamFromReadable } from '@remix-run/node'
 import { RemixServer } from '@remix-run/react'
 import { renderToPipeableStream } from 'react-dom/server'
@@ -7,14 +11,14 @@ import Pino from 'pino'
 
 const ABORT_DELAY = 5_000
 
-export function handleError (error: unknown, args: LoaderFunctionArgs): void {
+export function handleError(error: unknown, args: LoaderFunctionArgs): void {
   const { context } = args
   const { logger } = context
   const log = logger as Pino.Logger
   log.error(error, 'Error rendering page')
 }
 
-export default async function handleRequest (
+export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
@@ -32,7 +36,7 @@ export default async function handleRequest (
         abortDelay={ABORT_DELAY}
       />,
       {
-        onShellReady () {
+        onShellReady() {
           shellRendered = true
           const body = new PassThrough()
           const stream = createReadableStreamFromReadable(body)
@@ -48,10 +52,10 @@ export default async function handleRequest (
 
           pipe(body)
         },
-        onShellError (error: unknown) {
+        onShellError(error: unknown) {
           reject(error)
         },
-        onError (error: unknown) {
+        onError(error: unknown) {
           responseStatusCode = 500
           if (shellRendered) {
             log.error(error)

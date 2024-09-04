@@ -1,4 +1,9 @@
-import { ActionFunctionArgs, LoaderFunctionArgs, MetaFunction, redirect } from '@remix-run/node'
+import {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  MetaFunction,
+  redirect
+} from '@remix-run/node'
 import { Form, useLoaderData } from '@remix-run/react'
 import z from 'zod'
 
@@ -38,7 +43,7 @@ export const meta: MetaFunction = () => {
   ]
 }
 
-export async function loader (args: LoaderFunctionArgs): Promise<LoaderData> {
+export async function loader(args: LoaderFunctionArgs): Promise<LoaderData> {
   const { params, context } = args
   const { logger } = context
   logger.info({ params }, 'Edit Post Loader')
@@ -47,7 +52,9 @@ export async function loader (args: LoaderFunctionArgs): Promise<LoaderData> {
   }
 }
 
-export async function action (args: ActionFunctionArgs): Promise<Response | null> {
+export async function action(
+  args: ActionFunctionArgs
+): Promise<Response | null> {
   const { request, context } = args
   const { logger } = context
   const body = await request.formData()
@@ -73,14 +80,14 @@ export async function action (args: ActionFunctionArgs): Promise<Response | null
   return redirect('/posts')
 }
 
-export default function PostEdit (): JSX.Element {
+export default function PostEdit(): JSX.Element {
   const { post } = useLoaderData<typeof loader>()
 
   return (
     <>
       <h1 className='padded'>
-        {post === 'new' && (<>New Post</>)}
-        {post !== 'new' && (<>Edit Post</>)}
+        {post === 'new' && <>New Post</>}
+        {post !== 'new' && <>Edit Post</>}
       </h1>
 
       <Form
@@ -92,11 +99,19 @@ export default function PostEdit (): JSX.Element {
       >
         <label>
           Title:
-          <input type='text' name='title' placeholder='A descriptive title of the post...' />
+          <input
+            type='text'
+            name='title'
+            placeholder='A descriptive title of the post...'
+          />
         </label>
         <label>
           Stub:
-          <input type='text' name='stub' placeholder='A url stub for a unique url for post...' />
+          <input
+            type='text'
+            name='stub'
+            placeholder='A url stub for a unique url for post...'
+          />
         </label>
         <label>
           Body:
@@ -104,7 +119,11 @@ export default function PostEdit (): JSX.Element {
         </label>
         <label>
           Categories:
-          <input type='text' name='categories' placeholder='A comma delimited list of related post categories...' />
+          <input
+            type='text'
+            name='categories'
+            placeholder='A comma delimited list of related post categories...'
+          />
         </label>
         <label>
           Publish:
@@ -122,7 +141,6 @@ export default function PostEdit (): JSX.Element {
         </div>
         <button type='submit'>Save</button>
       </Form>
-
     </>
   )
 }

@@ -10,7 +10,7 @@ interface LayoutProps {
   hideNav?: boolean
 }
 
-export default function Layout (props: LayoutProps): JSX.Element {
+export default function Layout(props: LayoutProps): JSX.Element {
   const { children, scriptNonce, hideNav } = props
   return (
     <html lang='en'>
@@ -22,9 +22,7 @@ export default function Layout (props: LayoutProps): JSX.Element {
       </head>
       <body suppressHydrationWarning>
         <Header hideNav={hideNav} />
-        <div className='container'>
-          {children}
-        </div>
+        <div className='container'>{children}</div>
         <Footer />
         {scriptNonce != null && (
           <>
