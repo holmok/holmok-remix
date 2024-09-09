@@ -12,12 +12,12 @@
   display: inline-block;
   padding: 5px 10px;
   border-radius: 5px;
-  border: 1px solid black;
+  border: 0;
 }
 
-.action-bar .actions a:hover {
-  background-color: yellow;
-  color: black;
+.action-bar .actions a:hover,
+.action-bar .actions a:focus {
+  background-color: dimgray;
 }
 
 h1 {
@@ -46,12 +46,12 @@ form.form button[type="submit"] {
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
-  border: 1px solid black;
+  border: 0;
 }
 
-form.form button[type="submit"]:hover {
-  background-color: yellow;
-  color: black;
+form.form button[type="submit"]:hover,
+form.form button[type="submit"]:focus {
+  background-color: dimgray;
 }
 
 form.form label input[type="text"],
@@ -67,14 +67,38 @@ form.form label textarea {
   -webkit-min-logical-width: 100%;
 }
 
+form.form label input[type="text"]:focus,
+form.form label input[type="date"]:focus,
+form.form label textarea:focus {
+  background-color: lightgoldenrodyellow;
+}
+
+form.form label input[type="text"].warn,
+form.form label input[type="date"].warn,
+form.form label textarea.warn {
+  background-color: lightpink;
+  color: darkred;
+  border: darkred 1px solid;
+}
+
+form.form label input[type="text"].warn::placeholder,
+form.form label input[type="date"].warn::placeholder,
+form.form label textarea.warn::placeholder {
+  color: darkred;
+}
+
 form.form label input[type="checkbox"] {
   display: inline-block;
   position: relative;
   top: 2px;
   left: 5px;
   width: auto;
-} 
+}
 
+form.form label span.warn {
+  color: darkred;
+  font-size: 11px;
+}
 
 form.form .across {
   display: flex;
@@ -83,7 +107,7 @@ form.form .across {
   align-items: center;
 }
 
-textarea:focus, input:focus{
+textarea:focus, input:focus {
   outline: none;
   background-color: #eee;
   border: 1px solid black;
@@ -93,7 +117,7 @@ form.form label textarea {
   height: 300px;
 }
 
-@media (width <= 980px) {
+@media (width <=980px) {
   form.form {
     padding: 0;
   }
